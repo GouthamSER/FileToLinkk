@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/GouthamSER/Resources@main/FileToLink/Thunder.jpg" alt="Thunder Logo" width="120">
-  <h1 align="center">⚡ Thunder</h1>
+  <img src="https://i.ibb.co/nsHnt4bg/photo-2025-11-20-12-17-28.jpg" alt="File2link Logo" width="120">
+  <h1 align="center">⚡ File 2 Link</h1>
 </p>
 
 <p align="center">
@@ -11,7 +11,7 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.13%2B-blue?style=for-the-badge&logo=python" alt="Python Version"></a>
   <a href="https://github.com/Mayuri-Chan/pyrofork"><img src="https://img.shields.io/badge/Pyrofork-red?style=for-the-badge" alt="Pyrofork"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/GouthamSER/FileToLink?style=for-the-badge&color=green" alt="License"></a>
-  <a href="https://t.me/Thunder_Updates"><img src="https://img.shields.io/badge/Telegram-Channel-blue?style=for-the-badge&logo=telegram" alt="Telegram Channel"></a>
+  <a href="https://t.me/wudixh12"><img src="https://img.shields.io/badge/Telegram-Channel-blue?style=for-the-badge&logo=telegram" alt="Telegram Channel"></a>
 </p>
 
 <hr>
@@ -534,4 +534,5 @@ This project is not affiliated with Telegram. Use it responsibly and in complian
   <b>⭐ Star this project if you find it useful!</b><br>
   <a href="https://github.com/GouthamSER/FileToLink/issues/new">Report Bug</a> •
   <a href="https://github.com/GouthamSER/FileToLink/issues/new">Request Feature</a>
+
 </p>
