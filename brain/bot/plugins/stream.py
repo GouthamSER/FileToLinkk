@@ -153,35 +153,45 @@ async def send_dm_links(bot: Client, user_id: int, links: Dict[str, Any], chat_t
         logger.error(f"Error sending DM to user {user_id}: {e}", exc_info=True)
 
 
-async def send_link(msg: Message, links: Dict[str, Any]):
-    try:
-        await msg.reply_text(
-            MSG_LINKS.format(
-                file_name=links['media_name'],
-                file_size=links['media_size'],
-                download_link=links['online_link'],
-                stream_link=links['stream_link']
-            ),
-            quote=True,
-            parse_mode=enums.ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=get_link_buttons(links)
-        )
-    except FloodWait as e:
-        await asyncio.sleep(e.value)
-        await msg.reply_text(
-            MSG_LINKS.format(
-                file_name=links['media_name'],
-                file_size=links['media_size'],
-                download_link=links['online_link'],
-                stream_link=links['stream_link']
-            ),
-            quote=True,
-            parse_mode=enums.ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=get_link_buttons(links)
-        )
-
+  async def send_link(msg: Message, links: Dict[str, Any]):
+      text = MSG_LINKS.format(
+          file_name=links['media_name'],
+          file_size=links['media_size'],
+          download_link=links['online_link'],
+          stream_link=links['stream_link']
+      )
+      reply_markup = get_link_buttons(links)
+      
+      try:
+          await msg.reply_text(
+              text,
+              quote=True,
+              parse_mode=enums.ParseMode.MARKDOWN,
+              disable_web_page_preview=True,
+              reply_markup=reply_markup
+          )
+      except FloodWait as e:
+          await asyncio.sleep(e.value)
+          await msg.reply_text(
+              text,
+              quote=True,
+              parse_mode=enums.ParseMode.MARKDOWN,
+              disable_web_page_preview=True,
+              reply_markup=reply_markup
+          )
+      except Exception as e:
+          logger.error(f"Error sending link in chat {msg.chat.id}: {e}. Attempting fallback.")
+          # Fallback: Try without quote (e.g., if replied-to message is deleted)
+          try:
+              await msg.reply_text(
+                  text,
+                  quote=False,
+                  parse_mode=enums.ParseMode.MARKDOWN,
+                  disable_web_page_preview=True,
+                  reply_markup=reply_markup
+              )
+          except Exception as e2:
+              logger.error(f"Fallback send_link failed for chat {msg.chat.id}: {e2}. Links may still be sent via DM.")
 
 @StreamBot.on_message(filters.command("link") & ~filters.private)
 async def link_handler(bot: Client, msg: Message, **kwargs):
@@ -597,3 +607,4 @@ async def process_batch(
         )
     if notification_msg:
         await safe_delete_message(notification_msg)
+
